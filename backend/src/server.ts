@@ -13,10 +13,3 @@ initIO(server);
 initRedis();
 StartAllWhatsAppsSessions();
 gracefulShutdown(server);
-
-process.on("uncaughtException", err => {
-  logger.error({ info: "global uncaught exception", err });
-});
-process.on("unhandledRejection", err => {
-  if (err) logger.error({ info: "global unhandled rejection", err });
-});
