@@ -450,33 +450,20 @@ const init = async (whatsapp: Whatsapp): Promise<void> => {
 
     const args: string = process.env.CHROME_ARGS || "";
 
-    const wbot: Session = new Client({
- 
-      authStrategy: new LocalAuth({ clientId: `bd_${whatsapp.id}` }),
-      puppeteer: {
-        // headless: false, // TODO make sure chromium closes on session disconnection / delete
-        executablePath: process.env.CHROME_BIN || undefined,
-        browserWSEndpoint: process.env.CHROME_WS || undefined,
-        args: [
-          "--no-sandbox",
-          "--disable-setuid-sandbox",
-          "--disable-dev-shm-usage",
-          "--disable-accelerated-2d-canvas",
-          "--no-first-run",
-          "--no-zygote",
-          "--disable-gpu",
-          ...args.split(" ")
-        ]
-      }
-    });
-
-    wbot.on("qr", async qr => {
-      logger.info("Session:", sessionName);
-      qrCode.generate(qr, { small: true });
-      await whatsapp.update({ qrcode: qr, status: "qrcode", retries: 0 });
-
-      const sessionIndex = sessions.findIndex(s => s.id === whatsapp.id);
-      if (sessionIndex === -1) {
+  const wbot: Session = new Client({
+    authStrategy: new LocalAuth({ clientId: `bd_${whatsapp.id}` }),
+    puppeteer: {
+      browserWSEndpoint: process.env.CHROME_WS || undefined,
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--no-zygote",
+        "--disable-gpu",
+        ...args.split(" ")
+      ]
+    }
+  });
+   
         wbot.id = whatsapp.id;
         sessions.push(wbot);
       }
