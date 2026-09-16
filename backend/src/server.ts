@@ -6,7 +6,7 @@ import { initRedis } from "./libs/redisStore";
 import { StartAllWhatsAppsSessions } from "./services/WbotServices/StartAllWhatsAppsSessions";
 
 const server = app.listen(process.env.PORT, () => {
-  logger.info(`Server started on port: ${process.env.PORT}`);
+  logger.info(`Server started on port:${process.env.PORT}`);
 });
 
 initIO(server);
@@ -15,9 +15,9 @@ StartAllWhatsAppsSessions();
 gracefulShutdown(server);
 
 process.on("uncaughtException", err => {
-  logger.error({ info: "Global uncaught exception", err });
+  logger.error({ info: "global uncaught exception", err });
 });
 
 process.on("unhandledRejection", err => {
-  if (err) logger.error({ info: "Global unhandled rejection", err });
+  if (err) logger.error({ info: "global unhandled rejection", err });
 });
