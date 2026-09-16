@@ -15,7 +15,18 @@ import { logger } from "./utils/logger";
 Sentry.init({ dsn: process.env.SENTRY_DSN });
 
 const app = express();
-
+// --- ACOL WEBHOOK META ---
+app.get("/webhook", (req: any, res: any) => {
+  if (req.query["hub.verify_token"] === "acol_crm_2026") {
+    return res.send(req.query["hub.challenge"]);
+  }
+  return res.sendStatus(403);
+});
+app.post("/webhook", (req: any, res: any) => {
+  console.log("📩 MENSAJE META:", JSON.stringify(req.body, null, 2));
+  return res.sendStatus(200);
+});
+// --- FIN ACOL ---
 app.use(
   cors({
     credentials: true,
