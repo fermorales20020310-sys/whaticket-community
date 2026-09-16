@@ -35,7 +35,7 @@ const Routes = () => {
                 <Route exact path="/users" component={Users} isPrivate />
                 <Route exact path="/quickAnswers" component={QuickAnswers} isPrivate />
                 <Route exact path="/Settings" component={Settings} isPrivate />
-                <Route exact path="/klydo" component={KlydoAvance} isPrivate />
+             
               </LoggedInLayout>
             </WhatsAppsProvider>
           </Switch>
