@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const app = express();
 app.use(express.json());
 
@@ -6,8 +6,7 @@ app.get('/', (req, res) => {
   res.send('ACOL Webhook Online - Klydo');
 });
 
-// Verificación de Meta
-app.get('/webhook', (req, res) => {
+app.get('/webhook', (req: any, res: any) => {
   const mode = req.query['hub.mode'];
   const token = req.query['hub.verify_token'];
   const challenge = req.query['hub.challenge'];
@@ -18,13 +17,13 @@ app.get('/webhook', (req, res) => {
   return res.sendStatus(403);
 });
 
-// Recepción de mensajes
-app.post('/webhook', (req, res) => {
+app.post('/webhook', (req: any, res: any) => {
   try {
     const value = req.body.entry?.[0]?.changes?.[0]?.value;
     if (value?.messages && value.messages[0]) {
       const msg = value.messages[0];
-      console.log(`📩 MENSAJE META: ${msg.text?.body} de ${msg.from} - ${JSON.stringify(msg)}`);
+      console.log(`📩 MENSAJE META: ${msg.text?.body || 'media'} de ${msg.from}`);
+      console.log(JSON.stringify(req.body, null, 2));
     }
     res.sendStatus(200);
   } catch (e) {
@@ -33,5 +32,4 @@ app.post('/webhook', (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));
+export default app;
