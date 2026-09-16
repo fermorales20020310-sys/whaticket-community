@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS contacts (
 )`).then(()=>console.log("✅ DB Klydo lista"));
 
 app.get("/webhook", (req,res)=>{
-  if(req.query["hub.verify_token"]==="acol_crm_2026") return res.send(req.query["hub.challenge"]);
+if(req.query["hub.verify_token"]==="acol_crm_2026")
   res.sendStatus(403);
 });
 
