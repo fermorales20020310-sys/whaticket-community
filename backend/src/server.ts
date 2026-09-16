@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
     <body>
       <h1>ACOL - Bogotá</h1>
       <div><span class="badge">ACOL Webhook Online - Klydo</span> <span class="badge">ID: acolbogota</span></div>
-      <img src="https://i.ibb.co/nqYGp3sn/Whats-App-Image-2026-09-15-at-3-37-22-PM-2.jpg" alt="ACOL Bogota" />
+     <img src="https://i.ibb.co/nqYGp3sn/Whats-App-Image-2026-09-15-at-3-37-22-PM-2.jpg" alt="ACOL Bogota" />
       <br>
       <a class="btn" href="https://wa.me/573001234567?text=Hola%20ACOL%20Bogota">💬 Hablar por WhatsApp</a>
       <p style="color:#888">stellar-possibility-production-f191.up.railway.app</p>
